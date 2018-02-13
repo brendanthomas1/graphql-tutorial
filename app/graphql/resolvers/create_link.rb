@@ -9,8 +9,10 @@ class Resolvers::CreateLink < GraphQL::Function
   # mutation method
   # _obj is the parent element (nil in this case)
   # _ctx is the GraphQL context
-  def call(_obj, args, _ctx)
-    Link.create! description: args[:description], url: args[:url]
+  def call(_obj, args, ctx)
+    Link.create! description: args[:description],
+                 url: args[:url],
+                 user: ctx[:current_user]
   end
 end
 
